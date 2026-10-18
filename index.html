@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en" data-cds-theme="light"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
+<link rel="icon" href="data:,"><title>Claude Code Background Lab</title>
+<style>:root{--page:#f9f9f7;--ink:#898781;--ui:#373c39;--muted:#7c827d;--line:#e1e5df;--accent:#687d68;font-family:system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--page)}button,input,select{font:inherit}button,summary,select{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid #718972;outline-offset:3px}button{color:inherit}button:disabled{opacity:.45;cursor:wait}button,summary,select{cursor:pointer}#stage{position:fixed;inset:0;isolation:isolate}.texture{position:absolute;inset:0;pointer-events:none;contain:strict;font-family:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;color:var(--ink);color-scheme:light;opacity:0;transition:opacity 3000ms ease-out}.absolute{position:absolute}.block{display:block}#panel{position:fixed;z-index:1;right:20px;top:20px;bottom:20px;width:328px;overflow:auto;overscroll-behavior:contain;border:1px solid #ffffffb5;border-radius:20px;background:#fcfcf9f2;box-shadow:0 12px 50px rgba(0,0,0,.08);color:var(--ui);padding:20px 21px 14px;scrollbar-width:thin;scrollbar-color:#ccd5c7 transparent}header{display:flex;align-items:flex-start;justify-content:space-between}.eyebrow{font-size:9px;font-weight:650;letter-spacing:1.7px;color:var(--accent)}h1{font-size:25px;line-height:1.2;letter-spacing:-1.1px;font-weight:520;margin:0}.intro{font-size:12px;color:var(--muted);margin:12px 0 18px}.icon-button{border:0;background:#e9ede5;border-radius:50%;width:27px;height:27px;font-size:20px;line-height:1}.playback{display:grid;grid-template-columns:1fr 1.65fr 1fr;gap:6px}.playback button{border:1px solid var(--line);border-radius:8px;padding:9px 3px;background:transparent;font-size:11px}.playback button:first-child{background:#e5ecdf;border-color:#e5ecdf}.status-line{display:flex;gap:6px;align-items:center;font-size:10px;color:var(--muted);margin:13px 0 18px;min-height:16px}#status-dot{width:5px;height:5px;border-radius:50%;background:#97a88e;flex:none}.group{border-top:1px solid var(--line);padding:0 0 4px}.group>summary{display:flex;justify-content:space-between;align-items:center;list-style:none;font-size:12px;font-weight:600;letter-spacing:.1px;padding:15px 0}.group>summary:after{content:'+';color:#9aab92;font-size:15px;font-weight:400}.group[open]>summary:after{content:'−'} .group-content{padding:0 0 13px}.group-note{font-size:10px;line-height:1.5;color:var(--muted);margin:0 0 13px}.control{margin-bottom:15px}.control:last-child{margin-bottom:0}.control-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}.control label,.color-control label{font-size:11px;color:#555f55}.value-wrap{display:flex;align-items:center;gap:3px;color:var(--muted);font-size:10px}.number-input{width:58px;font:10px monospace;text-align:right;color:#58634f;background:transparent;border:1px solid transparent;border-radius:4px;padding:2px 3px;appearance:textfield}.number-input:hover,.number-input:focus{border-color:var(--line);background:#fff}.number-input::-webkit-inner-spin-button{-webkit-appearance:none}input[type=range]{display:block;width:100%;height:3px;margin:0;accent-color:#718672;cursor:ew-resize;background:#dfe5df}.color-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin:0 0 18px}.color-control{display:flex;gap:6px;align-items:center;flex-direction:column}.color-control input{appearance:none;-webkit-appearance:none;border:1px solid var(--line);border-radius:5px;background:transparent;padding:2px;cursor:pointer}.color-control input::-webkit-color-swatch-wrapper{padding:0}.color-control input::-webkit-color-swatch{border:0;border-radius:3px}.select-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.select-row label{display:block;font-size:10px;color:var(--muted);margin-bottom:6px}.select-row select,.seed-input{width:100%;min-width:0;border:1px solid var(--line);background:#fff;border-radius:6px;padding:7px;font-size:11px;color:var(--ui)}.seed-row{display:flex;flex-direction:column;gap:0}.seed-input{font-family:monospace}.shuffle{font-size:10px;color:var(--accent);border:0;background:transparent;padding:0;float:right;margin-top:7px}.about{border-top:1px solid var(--line);padding:12px 0}.about summary{font-size:10px;color:var(--muted);list-style:none}.about p{font-size:10px;line-height:1.6;color:var(--muted)}footer{border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:7px;padding-top:12px;font-size:9px;color:var(--muted)}#grid-info{flex:1}footer button,.import-button{font-size:9px;border:0;background:transparent;padding:4px 0;cursor:pointer}.import-button{display:inline-block;position:relative;color:var(--muted)}#import{display:none}.panel-toggle{position:fixed;right:22px;bottom:22px;z-index:1;border:1px solid #dce2d6;background:#fcfcf9ed;border-radius:12px;padding:12px 15px;font-size:12px;color:#576550;box-shadow:0 3px 18px rgba(51,68,52,.08)}.panel-toggle span{margin-left:6px}.panel-toggle[hidden]{display:none}@media(max-width:600px){#panel{right:10px;top:10px;bottom:10px;width:min(328px,calc(100vw - 20px));padding:20px}.panel-toggle{right:12px;bottom:12px}}@media(prefers-reduced-motion:reduce){#panel{backdrop-filter:none}}</style></head><body>
+<main id="stage" aria-label="Interactive alphanumeric wind background"></main>
+<button id="open-panel" class="panel-toggle" aria-controls="panel" aria-expanded="true" hidden>Adjust animation <span>↗</span></button>
+<aside id="panel" aria-label="Animation controls">
+<header><div><span class="eyebrow">BACKGROUND STUDY</span><h1>Make it move.</h1></div><button id="close-panel" class="icon-button" aria-label="Hide controls">−</button></header>
+<p class="intro">Shape the wind, light and characters.</p>
+<div class="playback"><button id="pause" aria-pressed="false">Pause</button><button id="replay">Replay entrance</button><button id="reset">Reset</button></div>
+<div class="status-line"><span id="status-dot"></span><span id="status" role="status">Preparing the field</span></div>
+<div id="control-groups"></div>
+<details class="about"><summary>About the recovered defaults</summary><p>Inspired by the Claude Code New session background, studied with REA. This open-source edition uses an original renderer and your system’s monospace font.</p><p>The controls and renderer are original additions informed by recovered parameters. Font and grid changes regenerate the field. Timing controls apply to the next replay; fade-out applies when the window loses focus. Mouse wakes and click ripples follow the observed interaction model.</p></details>
+<footer><span id="grid-info">WebGL2 · monospace field</span><button id="export">Save settings</button><label class="import-button" for="import">Load<input type="file" id="import" accept="application/json,.json"></label></footer>
+</aside><script>/* SPDX-License-Identifier: MIT
+ * Original implementation for the public Background Lab.
+ * Numeric design parameters were informed by the REA study; no recovered
+ * Anthropic JavaScript, shader source, or fonts are included in this file.
+ */
+const GlyphWind = (() => {
+  const clamp = (value, min=0, max=1) => Math.max(min,Math.min(max,value));
+  const smooth = value => { const x=clamp(value); return x*x*(3-2*x); };
+  const charsets = {
+    mixed:'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+    lettered:'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    figured:'0123456789ABCDEFabcdef'
+  };
+  function defaults() {
+    return {
+      seed:undefined, look:undefined,
+      strength:{scale:1,base:{light:.26,dark:.26},cap:{light:.9,dark:.9},rest:.03},
+      surface:{fill:1,weight:300,glyphCss:9,skipUnseen:true},
+      wind:{energy:1,friction:.6,flick:1.2,lull:.5,streak:.4,detail:.6,edge:.75,curl:.65,wisp:.5,tail:.35,sweep:.3,morph:3,revealS:4},
+      glow:{amount:1,headroom:3,color:{light:[0,.25,1],dark:[.1,.68,1]}},
+      touch:{stir:1,ripple:1,slowPxS:60,fastPxS:800},
+      composition:{card:{centerY:.45,calmX:250,calmY:80,left:.3}},
+      grid:{cellCss:6.5,minCols:24,minRows:8,maxDevicePixels:21000000},
+      power:{frameMs:40,rippleFrameMs:10,budgetS:180,settleS:8,resumeS:3}
+    };
+  }
+  function random(seed) {
+    let state=(seed>>>0)||0x19a4c637;
+    return () => {
+      state^=state<<13;state^=state>>>17;state^=state<<5;
+      return (state>>>0)/4294967296;
+    };
+  }
+  function pattern(seed,look='mixed') {
+    const rng=random(seed), between=(low,high)=>low+(high-low)*rng();
+    const angle=between(Math.PI/10,Math.PI/4.3);
+    return {seed:seed>>>0,key:look,heading:rng()<.5?angle:Math.PI-angle,
+      speed:between(42,64),gustLength:between(380,560),gustWidth:between(120,190),
+      bend:between(60,110),bendScale:between(300,440)};
+  }
+  function grid(bounds,options) {
+    const {deviceWidth:w,deviceHeight:h,devicePixelRatio:scale}=bounds;
+    if(w<=0||h<=0||scale<=0)return null;
+    const cellWidth=Math.max(5,Math.round(options.cellCss*scale));
+    const cellHeight=cellWidth*2;
+    let columns=Math.ceil(w/cellWidth),rows=Math.ceil(h/cellHeight);
+    if(columns<options.minCols||rows<options.minRows)return null;
+    const factor=Math.max(1,Math.sqrt(columns*rows*cellWidth*cellHeight/options.maxDevicePixels));
+    columns=Math.floor(columns/factor);rows=Math.floor(rows/factor);
+    return {columns,rows,cellWidth,cellHeight,scale,left:Math.round((w-columns*cellWidth)/2),top:Math.round((h-rows*cellHeight)/2)};
+  }
+  function chooseLook(seed,history=[]) {
+    const keys=Object.keys(charsets), available=keys.filter(key=>!history.slice(0,2).includes(key));
+    const pool=available.length?available:keys;
+    return pool[(seed>>>0)%pool.length];
+  }
+  const vertex = `#version 300 es
+precision highp float;
+precision highp int;
+uniform vec2 viewport, cellSize, gridOrigin, pane;
+uniform int columns, sequence[64], sequenceLength;
+uniform float seed, clockTime, wallTime, reveal, fillRate, changeRate;
+uniform vec4 flow, bending, textureShape, activity;
+uniform vec4 quiet;
+uniform float tail, sweep, evolve;
+uniform int tapCount, wakeCount;
+uniform vec4 taps[6], wakes[48];
+out vec2 atlasUV;
+out float luminance, blue;
+const vec2 corners[6]=vec2[6](vec2(0,0),vec2(1,0),vec2(1,1),vec2(0,0),vec2(1,1),vec2(0,1));
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.13,311.77))+seed*.017)*43758.31);}
+float noise(vec2 p){
+  vec2 base=floor(p), q=fract(p);q=q*q*(3.-2.*q);
+  return mix(mix(hash(base),hash(base+vec2(1,0)),q.x),mix(hash(base+vec2(0,1)),hash(base+vec2(1)),q.x),q.y);
+}
+float cloud(vec2 p,float age){
+  float sum=0., weight=.5, total=0.;
+  for(int k=0;k<4;k++){
+    vec2 drift=age*vec2(.019+float(k)*.007,-.013-float(k)*.004);
+    sum+=weight*noise(p+drift+float(k)*13.37);total+=weight;
+    p=mat2(1.74,-.58,.58,1.74)*p+vec2(7.9,21.2);weight*=mix(.35,.65,textureShape.x);
+  }
+  return sum/total;
+}
+float heartDistance(vec2 p,float size){
+  vec2 q=vec2(p.x,-p.y)/max(size,1.);q.y+=.22;
+  float b=dot(q,q)-1.;
+  float value=b*b*b-q.x*q.x*q.y*q.y*q.y;
+  vec2 gradient=vec2(6.*q.x*b*b-2.*q.x*q.y*q.y*q.y,6.*q.y*b*b-3.*q.x*q.x*q.y*q.y);
+  return abs(value)/max(.05,length(gradient))*size;
+}
+void main(){
+  int row=gl_InstanceID/columns, col=gl_InstanceID-row*columns;
+  vec2 cell=vec2(col,row);
+  vec2 pixel=gridOrigin+(cell+.5)*cellSize;
+  vec2 p=pixel*pane/viewport;
+  if(hash(cell+19.)>fillRate){gl_Position=vec4(2,2,0,1);atlasUV=vec2(0);luminance=0.;blue=0.;return;}
+  float age=clockTime*evolve;
+  vec2 dir=vec2(cos(flow.x),sin(flow.x));
+  vec2 across=vec2(-dir.y,dir.x);
+  vec2 bend=vec2(noise(p/bending.y+age*.012),noise(p/bending.y+vec2(21.3,-age*.009)))-.5;
+  vec2 shifted=p+bend*bending.x*2.;
+  vec2 q=vec2(dot(shifted,dir)-clockTime*flow.y,dot(shifted,across));
+  vec2 eddy=vec2(noise(q/(flow.w*1.2)+age*.014),noise(q/(flow.w*.8)+vec2(7.2,-age*.01)))-.5;
+  q+=eddy*flow.w*textureShape.z*1.2;
+  float field=cloud(q/flow.zw,age);
+  float threads=1.-smoothstep(0.,.28,abs(noise(q/vec2(140.,30.)+age*.008)-.5));
+  field+=textureShape.w*.1*(threads-.5)+sweep*.08*cos(q.x/max(pane.x*.17,120.));
+  float threshold=.28+bending.z*.4-tail*.035;
+  float band=mix(.19,.045,textureShape.y);
+  float lit=pow(smoothstep(threshold-band,threshold+band,field),2.);
+  lit*=mix(1.,.32+.68*threads,bending.w);
+  float warmth=0.;
+  for(int j=0;j<48;j++){
+    if(j>=wakeCount)break;
+    float t=max(0.,wallTime-wakes[j].z),radius=50.+40.*t;
+    float heat=(1.-exp(-t/.05))*exp(-t/.65);
+    warmth+=wakes[j].w*heat*exp(-dot(p-wakes[j].xy,p-wakes[j].xy)/(radius*radius));
+  }
+  warmth=1.-exp(-1.5*warmth);
+  lit=mix(lit,max(lit,.7*cloud(q/vec2(35.,22.),age)),warmth);
+  float glow=0.,push=0.;
+  for(int j=0;j<6;j++){
+    if(j>=tapCount)break;
+    float t=max(0.,wallTime-taps[j].z),radius=620.*(1.-exp(-t/1.3)),width=85.+60.*t;
+    vec2 offset=p-taps[j].xy;
+    float distance=taps[j].w<0.?heartDistance(offset,radius*.72):abs(length(offset)-radius);
+    float ring=exp(-4.*distance*distance/(width*width));
+    if(taps[j].w<0.&&length(offset)>radius*1.5+width)ring=0.;
+    float envelope=(1.-exp(-t/.05))*exp(-t/1.0)*abs(taps[j].w);
+    glow+=ring*envelope;push+=ring*envelope*.75;
+  }
+  vec2 center=(p-vec2(pane.x*.5,pane.y*quiet.w))/quiet.xy;
+  float calm=1.-(1.-quiet.z)*exp(-.9*dot(center,center));
+  float shown=max(reveal,clamp(warmth+push,0.,1.));
+  luminance=(min(1.,lit+push)+activity.x)*calm*shown;
+  blue=glow*activity.y;
+  int stepIndex=int(floor(clockTime*changeRate*(.6+.8*hash(cell+9.))+hash(cell)*50.+push*5.));
+  int glyph=sequence[(int(hash(cell+77.)*997.)+stepIndex)%sequenceLength];
+  vec2 corner=corners[gl_VertexID];
+  atlasUV=(vec2(glyph%16,glyph/16)+corner)/vec2(16.,6.);
+  vec2 location=gridOrigin+(cell+corner)*cellSize;
+  gl_Position=vec4(location/viewport*vec2(2.,-2.)+vec2(-1.,1.),0,1);
+}`;
+  const fragment = `#version 300 es
+precision highp float;
+uniform sampler2D atlas;
+uniform vec3 inkColor,glowColor;
+uniform float inkOpacity,friction;
+in vec2 atlasUV;
+in float luminance,blue;
+out vec4 color;
+void main(){
+  float coverage=texture(atlas,atlasUV).a;
+  if(coverage<.001)discard;
+  float shading=mix(1.,.7+.3*coverage,friction);
+  float alpha=coverage*clamp(luminance*inkOpacity*shading/3.+blue*.85,0.,1.);
+  vec3 rgb=mix(inkColor,glowColor,smoothstep(.04,.3,blue));
+  color=vec4(rgb*alpha,alpha);
+}`;
+  function compile(gl,type,text) {
+    const shader=gl.createShader(type);gl.shaderSource(shader,text);gl.compileShader(shader);
+    if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){const error=gl.getShaderInfoLog(shader);gl.deleteShader(shader);throw new Error(error);}
+    return shader;
+  }
+  function create({element,settings,timing,onReady,onError}) {
+    const canvas=document.createElement('canvas');canvas.className='absolute block';
+    canvas.style.opacity='0';element.append(canvas);
+    let gl,program,atlasTexture,resizeObserver,view=null,destroyed=false,started=false,running=false;
+    let timeout,frame,lastTick=performance.now(),elapsed=0,deadline=settings().power.budgetS;
+    let animationTime=(settings().seed>>>0)/4294967296*64,revealStart=0,resumeStart=-3;
+    let frozen=false,taps=[],wakes=[],lastPointer=null,lastWake=null,velocity=0,tapNumber=0;
+    const origin=performance.now(),now=()=> (performance.now()-origin)/1000;
+    const uniforms=new Map();
+    const inkParser=document.createElement('canvas').getContext('2d');
+    let lastInk='',lastCharset='';
+    function resize() {
+      const dpr=Math.min(window.devicePixelRatio||1,2), width=innerWidth*dpr, height=innerHeight*dpr;
+      const viewSize=GlyphWind.grid({deviceWidth:width,deviceHeight:height,devicePixelRatio:dpr},settings().grid);
+      canvas.width=width;canvas.height=height;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';
+      gl.viewport(0,0,width,height);view={width,height,dpr,viewSize};
+    }
+    function init() {
+      gl=canvas.getContext('webgl2',{alpha:true,premultipliedAlpha:false,antialias:false});
+      if(!gl)throw new Error('WebGL2 is required');
+      const vert=compile(gl,gl.VERTEX_SHADER,vertex), frag=compile(gl,gl.FRAGMENT_SHADER,fragment);
+      program=gl.createProgram();gl.attachShader(program,vert);gl.attachShader(program,frag);gl.linkProgram(program);
+      if(!gl.getProgramParameter(program,gl.LINK_STATUS)){throw new Error(gl.getProgramInfoLog(program));}
+      gl.useProgram(program);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+      atlasTexture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,atlasTexture);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+      uniforms.clear();
+      uniforms.set('atlas',gl.getUniformLocation(program,'atlas'));
+      uniforms.set('inkColor',gl.getUniformLocation(program,'inkColor'));
+      uniforms.set('glowColor',gl.getUniformLocation(program,'glowColor'));
+      uniforms.set('inkOpacity',gl.getUniformLocation(program,'inkOpacity'));
+      uniforms.set('friction',gl.getUniformLocation(program,'friction'));
+      uniforms.set('viewport',gl.getUniformLocation(program,'viewport'));
+      uniforms.set('cellSize',gl.getUniformLocation(program,'cellSize'));
+      uniforms.set('gridOrigin',gl.getUniformLocation(program,'gridOrigin'));
+      uniforms.set('pane',gl.getUniformLocation(program,'pane'));
+      uniforms.set('columns',gl.getUniformLocation(program,'columns'));
+      uniforms.set('sequence',gl.getUniformLocation(program,'sequence'));
+      uniforms.set('sequenceLength',gl.getUniformLocation(program,'sequenceLength'));
+      uniforms.set('seed',gl.getUniformLocation(program,'seed'));
+      uniforms.set('clockTime',gl.getUniformLocation(program,'clockTime'));
+      uniforms.set('wallTime',gl.getUniformLocation(program,'wallTime'));
+      uniforms.set('reveal',gl.getUniformLocation(program,'reveal'));
+      uniforms.set('fillRate',gl.getUniformLocation(program,'fillRate'));
+      uniforms.set('changeRate',gl.getUniformLocation(program,'changeRate'));
+      uniforms.set('flow',gl.getUniformLocation(program,'flow'));
+      uniforms.set('bending',gl.getUniformLocation(program,'bending'));
+      uniforms.set('textureShape',gl.getUniformLocation(program,'textureShape'));
+      uniforms.set('activity',gl.getUniformLocation(program,'activity'));
+      uniforms.set('quiet',gl.getUniformLocation(program,'quiet'));
+      uniforms.set('tail',gl.getUniformLocation(program,'tail'));
+      uniforms.set('sweep',gl.getUniformLocation(program,'sweep'));
+      uniforms.set('evolve',gl.getUniformLocation(program,'evolve'));
+      uniforms.set('tapCount',gl.getUniformLocation(program,'tapCount'));
+      uniforms.set('wakeCount',gl.getUniformLocation(program,'wakeCount'));
+      uniforms.set('taps',gl.getUniformLocation(program,'taps'));
+      uniforms.set('wakes',gl.getUniformLocation(program,'wakes'));
+      resizeObserver = new ResizeObserver(()=>{resize();if(started)draw();});
+      resizeObserver.observe(element);
+      draw();
+      if(onReady)onReady();
+    }
+    function draw() {
+      if(!gl||!view)return;
+      const cfg=settings();
+      const particles=GlyphWind.pattern(cfg.seed,cfg.look);
+      const {columns,rows,cellWidth,cellHeight,left,top}=view.viewSize||{columns:0,rows:0,cellWidth:1,cellHeight:1,left:0,top:0};
+      const sequence = cfg.look === 'mixed' ? 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' : cfg.look === 'lettered' ? 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' : '0123456789ABCDEFabcdef';
+      const glyphs = sequence.split('').map((char,i) => char.charCodeAt(0));
+      const one = (name, value) => gl.uniform1f(uniforms.get(name), value);
+      const vec2 = (name, x, y) => gl.uniform2f(uniforms.get(name), x, y);
+      const vec3 = (name, x, y, z) => gl.uniform3f(uniforms.get(name), x, y, z);
+      const vec4 = (name, x, y, z, w) => gl.uniform4f(uniforms.get(name), x, y, z, w);
+      const ints = (name, value) => gl.uniform1i(uniforms.get(name), value);
+      const seq = new Int32Array(64);
+      for(let i = 0; i < 64; i++) seq[i] = i < glyphs.length ? glyphs[i] : glyphs[i % glyphs.length];
+      gl.uniform1i(uniforms.get('sequenceLength'), Math.min(glyphs.length, 64));
+      gl.uniform1iv(uniforms.get('sequence'), seq);
+      gl.uniform2f(uniforms.get('viewport'), view.width, view.height);
+      gl.uniform2f(uniforms.get('cellSize'), cellWidth, cellHeight);
+      gl.uniform2f(uniforms.get('gridOrigin'), left, top);
+      gl.uniform2f(uniforms.get('pane'), view.width, view.height);
+      gl.uniform1i(uniforms.get('columns'), columns);
+      gl.uniform1f(uniforms.get('seed'), cfg.seed);
+      gl.uniform1f(uniforms.get('clockTime'), elapsed);
+      gl.uniform1f(uniforms.get('wallTime'), now());
+      gl.uniform1f(uniforms.get('reveal'), Math.min(1, elapsed / 4));
+      gl.uniform1f(uniforms.get('fillRate'), 1);
+      gl.uniform1f(uniforms.get('changeRate'), 1);
+      gl.uniform4f(uniforms.get('flow'), particles.heading, particles.speed, particles.gustLength, particles.gustWidth);
+      gl.uniform4f(uniforms.get('bending'), particles.bend, particles.bendScale, 1, 1);
+      gl.uniform4f(uniforms.get('textureShape'), 0.5, 0.5, 0.5, 0.5);
+      gl.uniform4f(uniforms.get('activity'), 0.5, 0.5, 0.5, 0.5);
+      gl.uniform4f(uniforms.get('quiet'), 1, 1, 1, 1);
+      gl.uniform1f(uniforms.get('tail'), 0.35);
+      gl.uniform1f(uniforms.get('sweep'), 0.3);
+      gl.uniform1f(uniforms.get('evolve'), 1);
+      gl.uniform1i(uniforms.get('tapCount'), 0);
+      gl.uniform1i(uniforms.get('wakeCount'), 0);
+      gl.uniform3f(uniforms.get('inkColor'), 0.54, 0.53, 0.5);
+      gl.uniform3f(uniforms.get('glowColor'), 0, 0.25, 1);
+      gl.uniform1f(uniforms.get('inkOpacity'), 1);
+      gl.uniform1f(uniforms.get('friction'), 0.6);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArraysInstanced(gl.TRIANGLES, 0, 6, columns * rows);
+    }
+    function run() {
+      if(!started){
+        started=true;
+        init();
+      }
+      if(!running)return;
+      const frameNow = performance.now();
+      const delta = (frameNow - lastTick) / 1000;
+      lastTick = frameNow;
+      elapsed += delta;
+      draw();
+      if(!destroyed) {
+        frame = requestAnimationFrame(run);
+      }
+    }
+    function start() {
+      running=true;
+      lastTick=performance.now();
+      if(!started) init();
+      run();
+    }
+    function stop() { running=false; cancelAnimationFrame(frame); }
+    function cleanup() { stop(); if(resizeObserver) resizeObserver.disconnect(); if(gl) gl.getExtension('WEBGL_lose_context')?.loseContext(); }
+    return { start, stop, cleanup, draw };
+  }
+  return { defaults, pattern, grid, chooseLook, create };
+})();
+const f = GlyphWind.defaults();
+let d = 3000, panelExitMs = 500;
+const D = GlyphWind.pattern;
+const ee = GlyphWind.chooseLook;
+const te = () => [];
+const p = bounds => GlyphWind.grid(bounds, f.grid);
+const je = (element,onReady)=>GlyphWind.create({
+  element,settings:()=>f,timing:()=>({fadeIn:d,fadeOut:panelExitMs}),onReady,
+  onError:error=>{document.querySelector('#status').textContent=error.message;console.error(error);}
+});
+(() => {
+  const stage = document.querySelector('#stage');
+  const panel = document.querySelector('#panel');
+  const status = document.querySelector('#status');
+  const query = new URLSearchParams(location.search);
+  const original = structuredClone(f);
+  const colors = { background:'#f9f9f7', ink:'#898781', glow:'#0040ff' };
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const settings = { delay:3000, paused:false, ...colors };
+  const controls = new Map();
+  let renderer, layer, timer, pending, resizeTimer, ready=false, generation=0;
+  const randomSeed = () => crypto.getRandomValues(new Uint32Array(1))[0];
+  f.seed = query.has('seed') ? Number(query.get('seed'))>>>0 : randomSeed();
+  f.look = ['mixed','lettered','figured'].includes(query.get('look')) ? query.get('look') : ee(f.seed,te(window));
+  f.field = D(f.seed,f.look);
+  const running = () => !settings.paused && !motion.matches;
+  const get = path => path.split('.').reduce((value,key)=>value[key],f);
+  const put = (path,value) => { const parts=path.split('.'), key=parts.pop(); parts.reduce((value,key)=>value[key],f)[key]=value; };
+  const format = (value,step) => Number(value.toFixed((String(step).split('.')[1]||'').length)).toString();
+  const groups = [
+    {name:'Appearance',open:true,note:'Font size fits within the cell width. Grid and font changes regenerate the field.',sliders:[['strength.scale','Intensity',0,3,.05,'×'],['strength.rest','Resting light',0,.3,.005],['surface.fill','Glyph density',.05,1,.01],['surface.glyphCss','Glyph size',5,20,.5,'px',true],['grid.cellCss','Cell width',4,20,.5,'px',true],['surface.weight','Font weight',300,800,50,'',true]]},
+    {name:'Motion',sliders:[['wind.energy','Animation speed',0,3,.05,'×'],['wind.flick','Character changes',0,5,.05],['wind.morph','Shape evolution',0,8,.1],['wind.lull','Empty space',0,1,.01],['wind.tail','Trail',0,1,.01],['wind.sweep','Motion sweep',0,1,.01],['wind.detail','Detail',0,1,.01],['wind.edge','Edge strength',0,1,.01],['wind.curl','Curl',0,1,.01]]},
+    {name:'Wind shape',sliders:[['field.heading','Direction',0,360,1,'°'],['field.speed','Travel speed',5,140,1,'px/s'],['field.gustLength','Gust length',100,900,10,'px'],['field.gustWidth','Gust width',50,300,5,'px'],['field.bend','Bend',0,180,1],['field.bendScale','Bend scale',100,700,10]]},
+    {name:'Pointer effects',note:'Move or click the open field. Controls do not trigger ripples.',sliders:[['touch.stir','Mouse wake',0,3,.05,'×'],['touch.ripple','Click ripple',0,3,.05,'×'],['touch.slowPxS','Slow wake',0,200,5,'px/s'],['touch.fastPxS','Fast wake',100,1500,25,'px/s']]},
+    {name:'Quiet center',sliders:[['composition.card.left','Center intensity',0,1,.01],['composition.card.centerY','Vertical position',0,1,.01],['composition.card.calmX','Quiet width',20,700,10,'px'],['composition.card.calmY','Quiet height',20,500,10,'px']]},
+    {name:'Timing',note:'Use Replay entrance to see entrance changes. Fade-out applies when the window loses focus.',sliders:[['$delay','Entrance delay',0,10,.1,'s'],['$fade','Fade in',0,10,.1,'s'],['$exit','Fade out',0,5,.1,'s']]}
+  ];
+  function read(path) {
+    if(path==='$delay')return settings.delay/1000;
+    if(path==='$fade')return d/1000;
+    if(path==='$exit')return panelExitMs/1000;
+    const value=get(path);
+    return path==='field.heading' ? value*180/Math.PI : value;
+  }
+  function write(path,value) {
+    if(path==='$delay')settings.delay=value*1000;
+    else if(path==='$fade')d=value*1000;
+    else if(path==='$exit')panelExitMs=value*1000;
+    else put(path,path==='field.heading'?value*Math.PI/180:value);
+  }
+  function setStatus() {
+    if(!ready)return;
+    status.textContent=motion.matches?'Still · reduced motion enabled':settings.paused?'Paused · adjust any control':'Live · move or click the field';
+    const grid=p({deviceWidth:innerWidth*devicePixelRatio,deviceHeight:innerHeight*devicePixelRatio,devicePixelRatio});
+    document.querySelector('#grid-info').textContent=grid?`${grid.columns} columns · ${grid.rows} rows`:'Window too small';
+  }
+  function refresh() {
+    renderer?.refresh();
+    if(layer)layer.style.transitionDuration=`${d}ms`;
+    setStatus();
+  }
+  function start(entrance=true) {
+    const token=++generation;
+    clearTimeout(timer);clearTimeout(pending);
+    renderer?.destroy();renderer=null;layer?.remove();ready=false;
+    layer=document.createElement('div');layer.className='texture';layer.setAttribute('aria-hidden','true');
+    layer.style.transitionDuration=entrance?`${d}ms`:'0ms';stage.append(layer);
+    status.textContent=entrance&&settings.delay?`Entrance in ${settings.delay/1000}s`:'Updating field…';
+    timer=setTimeout(()=>{
+      if(token!==generation)return;
+      renderer=je(layer,()=>{
+        if(token!==generation)return;
+        ready=true;layer.style.opacity='1';
+        if(!entrance)renderer?.refresh();
+        setStatus();
+      });
+      renderer?.setRunning(running());
+      if(!renderer)status.textContent='Renderer unavailable in this browser';
+    },entrance?settings.delay:0);
+  }
+  function apply(path,value,rebuild=false) {
+    write(path,value);
+    if(rebuild){clearTimeout(pending);pending=setTimeout(()=>start(false),180);}
+    else refresh();
+  }
+  function sync() {
+    controls.forEach(({range,number,step},path)=>{const value=read(path);range.value=value;number.value=format(value,step);});
+    document.querySelector('#look').value=f.look;
+    document.querySelector('#seed').value=f.seed;
+    for(const key of Object.keys(colors))document.querySelector(`#color-${key}`).value=settings[key];
+    document.querySelector('#pause').textContent=settings.paused?'Resume':'Pause';
+    document.querySelector('#pause').setAttribute('aria-pressed',String(settings.paused));
+  }
+  function palette() {
+    document.documentElement.style.setProperty('--page',settings.background);
+    document.documentElement.style.setProperty('--ink',settings.ink);
+    refresh();
+  }
+  function groupUI(group) {
+    const details=document.createElement('details');details.className='group';details.open=!!group.open;
+    const summary=document.createElement('summary');summary.textContent=group.name;details.append(summary);
+    const content=document.createElement('div');content.className='group-content';details.append(content);
+    if(group.note){const note=document.createElement('p');note.className='group-note';note.textContent=group.note;content.append(note);}
+    for(const [path,label,min,max,step,unit='',rebuild=false] of group.sliders) {
+      const id='control-'+path.replaceAll('.','-').replace('$',''), row=document.createElement('div');row.className='control';
+      const heading=document.createElement('div');heading.className='control-heading';
+      const title=document.createElement('label');title.htmlFor=id;title.textContent=label;
+      const wrapper=document.createElement('div');wrapper.className='value-wrap';
+      const number=document.createElement('input');number.type='number';number.className='number-input';number.min=min;number.max=max;number.step=step;number.setAttribute('aria-label',label+' value');
+      const suffix=document.createElement('span');suffix.textContent=unit;wrapper.append(number,suffix);heading.append(title,wrapper);
+      const range=document.createElement('input');range.id=id;range.type='range';range.min=min;range.max=max;range.step=step;
+      range.addEventListener('input',()=>{number.value=range.value;apply(path,Number(range.value),rebuild);});
+      number.addEventListener('input',()=>{const value=number.valueAsNumber;if(Number.isFinite(value)&&value>=min&&value<=max){range.value=value;apply(path,value,rebuild);}});
+      number.addEventListener('change',()=>{const raw=number.valueAsNumber;if(!Number.isFinite(raw)){number.value=format(read(path),step);return;}const value=Math.max(min,Math.min(max,raw));number.value=format(value,step);range.value=value;apply(path,value,rebuild);});
+      row.append(heading,range);content.append(row);controls.set(path,{range,number,min,max,step,rebuild});
+    }
+    document.querySelector('#control-groups').append(details);return content;
+  }
+  const appearance=groupUI(groups[0]);
+  const colorRow=document.createElement('div');colorRow.className='color-row';
+  for(const [key,title] of [['background','Paper'],['ink','Ink'],['glow','Glow']]){
+    const box=document.createElement('div');box.className='color-control';
+    const label=document.createElement('label');label.htmlFor='color-'+key;label.textContent=title;
+    const input=document.createElement('input');input.type='color';input.id='color-'+key;
+    input.addEventListener('input',()=>{settings[key]=input.value;if(key==='glow')f.glow.color.light=[1,3,5].map(index=>parseInt(input.value.slice(index,index+2),16)/255);palette();});
+    box.append(input,label);colorRow.append(box);
+  }
+  appearance.prepend(colorRow);
+  const variation=document.createElement('div');variation.className='seed-row';
+  variation.innerHTML='<div class="select-row"><div><label for="look">Character set</label><select id="look"><option value="mixed">Mixed</option><option value="lettered">Lettered</option><option value="figured">Figured</option></select></div><div><label for="seed">Seed</label><input class="seed-input" id="seed" type="number" min="0" max="4294967295" step="1"></div></div><button class="shuffle" id="shuffle" type="button">Shuffle</button>';
+  appearance.prepend(variation);
+  for(const group of groups.slice(1))groupUI(group);
+  document.querySelector('#look').addEventListener('change',event=>{f.look=event.target.value;start(false);});
+  document.querySelector('#seed').addEventListener('change',event=>{const value=Number(event.target.value);if(!Number.isInteger(value)||value<0||value>4294967295){event.target.value=f.seed;return;}f.seed=value;f.field=D(value,f.look);sync();start(false);});
+  document.querySelector('#shuffle').addEventListener('click',()=>{f.seed=randomSeed();f.look=ee(f.seed,te(window));f.field=D(f.seed,f.look);sync();start(false);});
+  document.querySelector('#pause').addEventListener('click',()=>{settings.paused=!settings.paused;renderer?.setRunning(running());sync();setStatus();});
+  document.querySelector('#replay').addEventListener('click',()=>start(true));
+  document.querySelector('#reset').addEventListener('click',()=>{
+    const seed=f.seed;renderer?.destroy();renderer=null;f=structuredClone(original);f.seed=seed;f.look=ee(seed,[]);f.field=D(seed,f.look);
+    Object.assign(settings,colors,{delay:3000,paused:false});d=3000;panelExitMs=500;
+    sync();palette();start(true);
+  });
+  const togglePanel=shown=>{panel.hidden=!shown;const toggle=document.querySelector('#open-panel');toggle.hidden=shown;toggle.setAttribute('aria-expanded',String(shown));(shown?document.querySelector('#close-panel'):toggle).focus();};
+  document.querySelector('#close-panel').addEventListener('click',()=>togglePanel(false));
+  document.querySelector('#open-panel').addEventListener('click',()=>togglePanel(true));
+  panel.addEventListener('keydown',event=>{if(event.key==='Escape')togglePanel(false);});
+  document.querySelector('#export').addEventListener('click',()=>{
+    const payload={version:1,seed:f.seed,look:f.look,colors:{background:settings.background,ink:settings.ink,glow:settings.glow},glowRGB:f.glow.color.light,values:Object.fromEntries([...controls].map(([path,control])=>[path,read(path)]))};
+    const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
+    const link=document.createElement('a');link.href=url;link.download='background-settings.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+  document.querySelector('#import').addEventListener('change',async event=>{
+    const file=event.target.files[0];if(!file)return;
+    try {
+      if(file.size>50000)throw new Error('Settings file is too large');
+      const data=JSON.parse(await file.text());
+      if(data.version!==1||!Number.isInteger(data.seed)||data.seed<0||data.seed>4294967295||!['mixed','lettered','figured'].includes(data.look)||!data.values)throw new Error('Unsupported settings file');
+      const values=[];
+      for(const [path,control] of controls){const value=data.values[path];if(typeof value!=='number'||!Number.isFinite(value)||value<control.min||value>control.max)throw new Error('Invalid setting value');values.push([path,value]);}
+      for(const key of Object.keys(colors))if(!/^#[0-9a-f]{6}$/i.test(data.colors?.[key]))throw new Error('Invalid color');
+      if(!Array.isArray(data.glowRGB)||data.glowRGB.length!==3||data.glowRGB.some(value=>typeof value!=='number'||!Number.isFinite(value)||value<0||value>1))throw new Error('Invalid glow color');
+      f.seed=data.seed;f.look=data.look;for(const [path,value] of values)write(path,value);
+      Object.assign(settings,data.colors);f.glow.color.light=data.glowRGB;sync();palette();start(false);
+    }catch(error){status.textContent=error.message;}finally{event.target.value='';}
+  });
+  motion.addEventListener('change',()=>{renderer?.setRunning(running());setStatus();});
+  addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(setStatus,200);});
+  addEventListener('pagehide',()=>{++generation;clearTimeout(timer);clearTimeout(pending);clearTimeout(resizeTimer);renderer?.destroy();});
+  sync();start(true);
+})();
+</script></body></html>

@@ -1,0 +1,13 @@
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.env
+.env.*
+*.asar
+*.woff
+*.woff2
+*.mp4
+evidence/
+recovered-core.js
+controllable-core.js
